@@ -53,26 +53,7 @@ namespace PyramidPanic
         // en update alle variabelen, methods enz.......
         public void Update(GameTime gameTime)
         {
-            if (Input.EdgeDetectKeyDown(Keys.Right) || Input.EdgeDetectMousePressLeft())
-            {
-                this.game.IState = this.game.GameOverScene;
-            }
-            if (Input.EdgeDetectKeyDown(Keys.Left))
-            {
-                this.game.IState = this.game.HelpScene;
-            }
-            if (Keyboard.GetState().IsKeyDown(Keys.Up))
-            {
-                this.game.IState = this.game.PlayScene;
-            }
-            if (Keyboard.GetState().IsKeyDown(Keys.Down))
-            {
-                this.game.IState = this.game.PlayScene;
-            }
-            if (Input.EdgeDetectMousePressRight())
-            {
-                this.game.IState = this.game.HelpScene;
-            }
+            this.menu.Update();
         }
 
         // Draw methode. Deze methode wordt normaal 60 maal per seconde aangeroepen en

@@ -15,13 +15,21 @@ namespace PyramidPanic
     public class Image
     {
         //fields
-
+        //Maak een variable aan van het type Texture2D met de naam texture
         private Texture2D texture;
         //Maak een rectangle voor het detecteren van collisions
         private Rectangle rectangle;
         //Maak een variable aan om de game in op te slaan.
         private PyramidPanic game;
+        //Maak een variable aan van het type Color met de naam color
+        private Color color = Color.White;
 
+        //Propperties
+        public Color Color
+        { 
+            get { return this.color; }
+            set { this.color = value; }
+        }
         //constructor
         public Image(PyramidPanic game, String pathNameAsset,Vector2 position)
         {
@@ -38,7 +46,7 @@ namespace PyramidPanic
 
         //draw
         public void Draw(GameTime gametime){
-            this.game.spritebatch.Draw(this.texture, this.rectangle, Color.White);
+            this.game.spritebatch.Draw(this.texture, this.rectangle, this.color);
         }
 
         //Helper Methodes
