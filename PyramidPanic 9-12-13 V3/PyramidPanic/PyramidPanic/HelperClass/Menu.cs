@@ -98,10 +98,9 @@ namespace PyramidPanic
                     this.load.Color = Color.Yellow;
                     if (Input.EdgeDetectKeyDown(Keys.Enter))
                     {
-                        this.game.IState = this.game.PlayScene;
+                        this.game.IState = this.game.LoadScene;
                     }
                     break;
-
                 case Buttons.Scores:
                     this.scores.Color = Color.Aquamarine;
                     if (Input.EdgeDetectKeyDown(Keys.Enter))

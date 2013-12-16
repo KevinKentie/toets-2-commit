@@ -31,6 +31,9 @@ namespace PyramidPanic
         //Maak een variable aan van het type GameOverScene
         private GameOverScene gameOverScene;
 
+        //Maak een variable aan van het type GameOverScene
+        private LoadScene loadScene;
+
         //Maak een variable van het type interface IState
         private IState iState;
 
@@ -42,6 +45,13 @@ namespace PyramidPanic
         {
             get { return this.iState; }
             set { this.iState = value; }
+        }
+
+        //Maak het field this.LoadScene beschikbaar buiten de class d.m.v een
+        //property LoadScene
+        public LoadScene LoadScene
+        {
+            get { return this.loadScene; }
         }
 
         //Maak het field this.StartScene beschikbaar buiten de class d.m.v een
@@ -122,6 +132,10 @@ namespace PyramidPanic
             //We maken nu het object/instantie aan van het type gameOverScene. Dit doe je door
             //de constructor aan te roepen van GameOverScene class.
             this.gameOverScene = new GameOverScene(this);
+
+            //We maken nu het object/instantie aan van het type loadScene. Dit doe je door
+            //de constructor aan te roepen van loadScene class.
+            this.loadScene = new LoadScene(this);
 
             this.iState = this.startScene;
 
