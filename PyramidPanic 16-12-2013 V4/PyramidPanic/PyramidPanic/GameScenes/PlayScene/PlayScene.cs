@@ -12,13 +12,13 @@ using Microsoft.Xna.Framework.Media;
 
 namespace PyramidPanic
 {
-    public class LoadScene : IState
+    public class PlayScene : IState
     {
         //Fields van de class StartScene
         private PyramidPanic game;
 
         //Constructor van de StartScene-class krijgt een object mee van het type PyramidPanic 
-        public LoadScene(PyramidPanic game)
+        public PlayScene(PyramidPanic game)
         {
             this.game = game;
         }
@@ -51,7 +51,8 @@ namespace PyramidPanic
         // tekent de textures p[ het canvas
         public void Draw(GameTime gameTime)
         {
-            this.game.GraphicsDevice.Clear(Color.Silver);
+            this.game.GraphicsDevice.Clear(Color.Black);
+
         }
     }
 }
