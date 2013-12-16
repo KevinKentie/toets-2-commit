@@ -30,6 +30,12 @@ namespace PyramidPanic
             get { return this.color; }
             set { this.color = value; }
         }
+
+        //Maak een property voor het rectangle field.
+        public Rectangle Rectangle
+        {
+            get { return this.rectangle; }
+        }
         //constructor
         public Image(PyramidPanic game, String pathNameAsset,Vector2 position)
         {

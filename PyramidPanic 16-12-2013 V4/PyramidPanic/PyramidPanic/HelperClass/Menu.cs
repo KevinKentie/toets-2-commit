@@ -123,7 +123,58 @@ namespace PyramidPanic
                     }
                     break;
             }
+            if (this.start.Rectangle.Intersects(Input.MouseRect()))
+            {
+                if (Input.EdgeDetectMousePressLeft())
+                {
+                    this.game.IState = this.game.PlayScene;
+                }
+                this.ChangeButtonColorToNormal();
+                this.start.Color = Color.Violet;
+                
+            }
+            else
+                if (this.load.Rectangle.Intersects(Input.MouseRect()))
+                {
+                    if (Input.EdgeDetectMousePressLeft())
+                    {
+                        this.game.IState = this.game.LoadScene;
+                    }
+                    this.ChangeButtonColorToNormal();
+                    this.load.Color = Color.Yellow;
+                }
+                else
+                    if (this.scores.Rectangle.Intersects(Input.MouseRect()))
+                    {
+                        if (Input.EdgeDetectMousePressLeft())
+                        {
+                            this.game.IState = this.game.ScoreScene;
+                        }
+                        this.ChangeButtonColorToNormal();
+                        this.scores.Color = Color.YellowGreen;
+                    }
+                    else
+                        if (this.help.Rectangle.Intersects(Input.MouseRect()))
+                        {
+                            if (Input.EdgeDetectMousePressLeft())
+                            {
+                                this.game.IState = this.game.HelpScene;
+                            }
+                            this.ChangeButtonColorToNormal();
+                            this.help.Color = Color.Red;
+                        }
+                        else
+                            if (this.quit.Rectangle.Intersects(Input.MouseRect()))
+                            {
+                                if (Input.EdgeDetectMousePressLeft())
+                                {
+                                    this.game.Exit();
+                                }
+                                this.ChangeButtonColorToNormal();
+                                this.quit.Color = Color.SandyBrown;
+                            }
         }
+        
 
         //draw
         public void Draw(GameTime gameTime)
