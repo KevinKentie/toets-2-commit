@@ -16,7 +16,7 @@ namespace PyramidPanic
         //fields
         //Maak een enumaration voor de mogelijke buttons
         private enum Buttons { Start, Load, Scores, Help, Quit };
-
+        //                       1      2      3     4      5
         //Maak een variabele van het type Buttons en geef hem de waarde Buttons.Start
         private Buttons buttonActive = Buttons.Start;
 
@@ -34,9 +34,12 @@ namespace PyramidPanic
         //Maak een variabele buttenlist van het type List<Image>
         private List<Image> buttenList;
 
+        private KeyboardState ks;
+
         //constructor
         public Menu(PyramidPanic game)
         {
+            this.ks = Keyboard.GetState();
             this.game = game;
             this.Initialize();
         }
@@ -73,37 +76,52 @@ namespace PyramidPanic
             if (Input.EdgeDetectKeyDown(Keys.Right))
             {
                 this.buttonActive++;
+                this.ChangeButtonColorToNormal();
             }
             if (Input.EdgeDetectKeyDown(Keys.Left))
             {
                 this.buttonActive--;
+                this.ChangeButtonColorToNormal();
             }
 
-            
-
-            //We doorlopen het this.buttonList object (List<Image> ) met een foreach instructie
-            //En we roepen ieder image-opject de propertie Color op en geven deze de waarde Color.White
-            foreach (Image image in this.buttenList)
-            {
-                image.Color = Color.White;
-            }
 
             switch (this.buttonActive)
             {
                 case Buttons.Start:
-                    this.start.Color = this.activeColor;
+                    this.start.Color = Color.Violet;
+                    if (Input.EdgeDetectKeyDown(Keys.Enter))
+                    {
+                        this.game.IState = this.game.PlayScene;
+                    }
                     break;
                 case Buttons.Load:
-                    this.load.Color = this.activeColor;
+                    this.load.Color = Color.Yellow;
+                    if (Input.EdgeDetectKeyDown(Keys.Enter))
+                    {
+                        this.game.IState = this.game.PlayScene;
+                    }
                     break;
+
                 case Buttons.Scores:
-                    this.scores.Color = this.activeColor;
+                    this.scores.Color = Color.Aquamarine;
+                    if (Input.EdgeDetectKeyDown(Keys.Enter))
+                    {
+                        this.game.IState = this.game.PlayScene;
+                    }
                     break;
                 case Buttons.Help:
-                    this.help.Color = this.activeColor;
+                    this.help.Color = Color.IndianRed;
+                    if (Input.EdgeDetectKeyDown(Keys.Enter))
+                    {
+                        this.game.IState = this.game.HelpScene;
+                    }
                     break;
                 case Buttons.Quit:
                     this.quit.Color = this.activeColor;
+                    if (Input.EdgeDetectKeyDown(Keys.Enter))
+                    {
+                        game.Exit();
+                    }
                     break;
             }
         }
@@ -111,11 +129,21 @@ namespace PyramidPanic
         //draw
         public void Draw(GameTime gameTime)
         {
-            this.start.Draw(gameTime);
-            this.load.Draw(gameTime);
-            this.scores.Draw(gameTime);
-            this.help.Draw(gameTime);
-            this.quit.Draw(gameTime);
+            foreach (Image image in this.buttenList)
+            {
+                image.Draw(gameTime);
+            }
+        }
+
+        //Helper method voor het met wit licht beschijnen van de buttons.
+        private void ChangeButtonColorToNormal()
+        {
+            //We doorlopen het this.buttonList object (List<Image> ) met een foreach instructie
+            //En we roepen ieder image-opject de propertie Color op en geven deze de waarde Color.White
+            foreach (Image image in this.buttenList)
+            {
+                image.Color = Color.White;
+            }
         }
     }
 }

@@ -21,13 +21,14 @@ namespace PyramidPanic
         public HelpScene(PyramidPanic game)
         {
             this.game = game;
+            this.Initialize();
         }
 
         //Initialize methode. deze methode initialiseert (geeft startwaarden aan variabelen)
         //Void wil zeggen dat er niets terug gegeven word
         public void Initialize()
         {
-
+            this.LoadContent();
         }
 
         //LoadContent methode. Deze methode maakt nieuwe objecten aan van verschillende
