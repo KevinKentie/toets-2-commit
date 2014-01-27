@@ -15,10 +15,10 @@ namespace PyramidPanic
     public class PlayScene : IState
     {
         //Fields van de class StartScene
-        private ScorpionClass scorpion;
-        private Beetle beetle;
-        private Explorer explorer;
+        private Beetle beetle, beetle1;
+        private Scorpion scorpion, scorpion1;
         private PyramidPanic game;
+        private Explorer explorer;
 
         //Constructor van de StartScene-class krijgt een object mee van het type PyramidPanic 
         public PlayScene(PyramidPanic game)
@@ -31,16 +31,18 @@ namespace PyramidPanic
         //Void wil zeggen dat er niets terug gegeven word
         public void Initialize()
         {
-            this.scorpion = new ScorpionClass(this.game);
-            this.beetle = new Beetle(this.game);
-            this.explorer = new Explorer(this.game);
+            this.LoadContent();
         }
 
         //LoadContent methode. Deze methode maakt nieuwe objecten aan van verschillende
         //classes
         public void LoadContent()
         {
-            
+            this.scorpion = new Scorpion(this.game, new Vector2(300f, 188f));
+            this.scorpion1 = new Scorpion(this.game, new Vector2(350f, 288f));
+            this.beetle = new Beetle(this.game, new Vector2(100f, 300f));
+            this.beetle1 = new Beetle(this.game, new Vector2(150f, 250f));
+            this.explorer = new Explorer(this.game, new Vector2(16f, 240f));
         }
 
         // Update methode. Deze methode wordt normaal 60 maal per seconde aangeroepen
@@ -51,8 +53,10 @@ namespace PyramidPanic
             {
                 this.game.IState = this.game.StartScene;
             }
-            this.scorpion.Update(gameTime);
             this.beetle.Update(gameTime);
+            this.beetle1.Update(gameTime);
+            this.scorpion.Update(gameTime);
+            this.scorpion1.Update(gameTime);
             this.explorer.Update(gameTime);
         }
 
@@ -61,10 +65,11 @@ namespace PyramidPanic
         public void Draw(GameTime gameTime)
         {
             this.game.GraphicsDevice.Clear(Color.LightGreen);
-            this.scorpion.Draw(gameTime);
             this.beetle.Draw(gameTime);
+            this.scorpion.Draw(gameTime);
+            this.beetle1.Draw(gameTime);
+            this.scorpion1.Draw(gameTime);
             this.explorer.Draw(gameTime);
-
         }
     }
 }

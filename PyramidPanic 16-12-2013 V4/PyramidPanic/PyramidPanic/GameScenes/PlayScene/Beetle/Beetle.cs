@@ -12,27 +12,62 @@ using Microsoft.Xna.Framework.Media;
 
 namespace PyramidPanic
 {
-    public class Beetle : AnimatedSprite
+    public class Beetle : IAnimatedSprite
     {
         //fields
         private PyramidPanic game;
+        private IBeetleState state;
         private Texture2D texture;
         private int speed = 2;
+        private Vector2 position;
+
+        //Maak van iedere toestand (state) een field
+        private WalkUp walkUp;
+        private WalkDown walkDown;
 
 
         //propperties
-
+        public IBeetleState State
+        {
+            set { this.state = value; }
+        }
+        public PyramidPanic Game
+        {
+            get { return this.game; }
+        }
+        public int Speed
+        {
+            get { return this.speed; }
+        }
+        public Texture2D Texture
+        {
+            get { return this.texture; }
+        }
+        public Vector2 Position
+        {
+            get { return this.position; }
+            set { this.position = value; }
+        }
+        public WalkDown WalkDown
+        {
+            get { return this.walkDown; }
+        }
+        public WalkUp WalkUp
+        {
+            get { return this.walkUp; }
+        }
 
 
 
         //constructor
-        public Beetle(PyramidPanic game)
-            : base(game)
+        public Beetle(PyramidPanic game, Vector2 position)
         {
             this.game = game;
+            this.position = position;
             this.texture = game.Content.Load<Texture2D>(@"Scorpion/Beetle");
-            this.destinationRect.X = 0;
-            this.destinationRect.Y = 400;
+            this.walkUp = new WalkUp(this);
+            this.walkDown = new WalkDown(this);
+            this.state = walkUp;
 
         }
 
@@ -41,28 +76,14 @@ namespace PyramidPanic
         //update
         public void Update(GameTime gameTime)
         {
-            if (this.destinationRect.Y > (480 - 32) ||
-                this.destinationRect.Y < 0)
-            {
-                if (this.speed > 0)
-                {
-                    this.effect = SpriteEffects.None;
-                }
-                else
-                {
-                    this.effect = SpriteEffects.FlipVertically;
-                }
-                this.speed = this.speed * -1;
-            }
-            this.destinationRect.Y += this.speed;
-            base.Update(gameTime);
+            this.state.Update(gameTime);
         }
 
 
         //draw
         public void Draw(GameTime gameTime)
         {
-            base.Draw(gameTime, this.texture);
+            this.state.Draw(gameTime);
         }
     }
 }

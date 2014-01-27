@@ -15,19 +15,27 @@ namespace PyramidPanic
     public class AnimatedSprite
     {
         //fields
-        private PyramidPanic game;
+        private IAnimatedSprite iAnimatedSprite;
+        private Scorpion scorpion;
         private Texture2D texture;
         protected Rectangle destinationRect, sourceRect;
         private float timer = 0f;
-        protected SpriteEffects effect = SpriteEffects.None;
+        protected SpriteEffects effect;
+        protected int imageNumber = 1; //loopt van 0 tot en met 3
+        protected float rotation = 0f;
+
+        private Vector2 pivot;
 
 
         //constructor
-        public AnimatedSprite(PyramidPanic game)
+        public AnimatedSprite(IAnimatedSprite iAnimatedSprite)
         {
-            this.game = game;
-            this.destinationRect = new Rectangle(100, 200, 32, 32);
-            this.sourceRect = new Rectangle(0, 0, 32, 32);
+            this.iAnimatedSprite = iAnimatedSprite;
+            this.sourceRect = new Rectangle(this.imageNumber * 32, 0, 32, 32);
+            this.effect = SpriteEffects.None;
+
+            this.pivot = new Vector2(16f, 16);
+            
         }
 
         //update
@@ -52,16 +60,18 @@ namespace PyramidPanic
 
 
         //draw method van de animatedsprite class
-        public void Draw(GameTime gameTime, Texture2D texture)
+        public void Draw(GameTime gameTime)
         {
-            this.game.spritebatch.Draw     (texture,
-                                           this.destinationRect,
-                                           this.sourceRect,
-                                           Color.White,
-                                           0f,
-                                           Vector2.Zero,
-                                           this.effect,
-                                           0f);
+            this.iAnimatedSprite.Game.spritebatch.Draw(this.iAnimatedSprite.Texture,
+                                              this.destinationRect,
+                                              this.sourceRect,
+                                              Color.White,
+                                              this.rotation,
+                                              this.pivot,
+                                              this.effect,
+                                              0f);
+
+
         }
     }
 }

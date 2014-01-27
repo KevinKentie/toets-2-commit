@@ -12,31 +12,22 @@ using Microsoft.Xna.Framework.Media;
 
 namespace PyramidPanic
 {
-    public class Explorer : IAnimatedSprite
+    public class Scorpion : IAnimatedSprite
     {
         //fields
         private PyramidPanic game;
         private IEntityState state;
         private Texture2D texture;
-        private int speed = 3;
+        private int speed = 2;
         private Vector2 position;
-        private ExplorerIdle idle;
-
-        //Maak van iedere toestand (state) een field
-        private ExplorerWalkUp walkUp;
-        private ExplorerWalkDown walkDown;
-        private ExplorerWalkLeft walkLeft;
-        private ExplorerWalkRight walkRight;
+        private WalkLeft walkLeft;
+        private WalkRight walkRight;
 
 
         //propperties
         public IEntityState State
         {
             set { this.state = value; }
-        }
-        public ExplorerIdle Idle
-        {
-            get { return this.idle; }
         }
         public PyramidPanic Game
         {
@@ -55,19 +46,11 @@ namespace PyramidPanic
             get { return this.position; }
             set { this.position = value; }
         }
-        public ExplorerWalkDown WalkDown
-        {
-            get { return this.walkDown; }
-        }
-        public ExplorerWalkUp WalkUp
-        {
-            get { return this.walkUp; }
-        }
-        public ExplorerWalkRight WalkRight
+        public WalkRight WalkRight
         {
             get { return this.walkRight; }
         }
-        public ExplorerWalkLeft WalkLeft
+        public WalkLeft WalkLeft
         {
             get { return this.walkLeft; }
         }
@@ -75,17 +58,14 @@ namespace PyramidPanic
 
 
         //constructor
-        public Explorer(PyramidPanic game, Vector2 position)
+        public Scorpion(PyramidPanic game, Vector2 position)
         {
             this.game = game;
             this.position = position;
-            this.texture = game.Content.Load<Texture2D>(@"explorer/Explorer");
-            this.walkUp = new ExplorerWalkUp(this);
-            this.walkDown = new ExplorerWalkDown(this);
-            this.walkRight = new ExplorerWalkRight(this);
-            this.walkLeft = new ExplorerWalkLeft(this);
-            this.idle = new ExplorerIdle(this);
-            this.state = this.idle;
+            this.texture = game.Content.Load<Texture2D>(@"Scorpion/Scorpion");
+            this.walkLeft = new WalkLeft(this);
+            this.walkRight = new WalkRight(this);
+            this.state = walkLeft;
 
         }
 
